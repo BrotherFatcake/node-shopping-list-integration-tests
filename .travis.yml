@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy: peaceful-falls-82439
+  provider: heroku
+  api_key:
+    secure: KyuwibQCufgRKkeogv8Xa6+SBJa9FoA+Op4PmEZDRHjJtS9UDCe9RrN/V3Olc85IMgCvvDNZdsSvGFNFCAyRXZdlTgYV17BuK74nKPsADHgfSHvjBWKWpSU/ET0OHdGG+w6ISCzu9gzNiB3yOb8wT2twvujeoTv5tbU3NSZ8K7u8RtGnPamTW+RV0MITdZ5FWYA6vElDlrwHh/tGwLmYiFQO1k4yPSfW/8+6aPyd2pspOWb8O0jvcTHKIHLdMS43ZSX1u1wmkX2chf8mKeFvFBV41vZRd6AMtJ752SXZDTjzRgu+8OXsrb3JDw0+n4+7A+UHbufFpN9Ve1MONR7/TwmrscyVD0+mIakI5LShaJJeM4YOf+Biclq1uG11m6D1lWJBbWHlHuLwqiKxjYAd7j80wuK90/sbH1Y1JYSWtX8Mf+sp3hih1SBLXunq0548Whfg3fJOubcCfBNuq9E0Z9vimYKifk0V5BeRyddpLCMrEAPn0wkhk6lXxm1euOUXGMq+/4Ie6rQf6PWOegtigMRjQbxLRKsQIlT0HoYR/CuD16k4ZWroHTxn6+GV5Slt3nepCIQuJnyeD6wPMxa4UULhyvO2oPjh9Xg+e/5Bq7NLMiD+TG8Z+0IvfteRXNwMZ4cCSRAuc4Wq2T2G9WF0tPMAx8n2cQgvV2cZm8U4c7w=
+  app: node-shopping-list-integration-tests
+  on:
+    repo: BrotherFatcake/node-shopping-list-integration-tests
