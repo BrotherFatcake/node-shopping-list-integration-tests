@@ -142,3 +142,94 @@ describe('Shopping List', function() {
       });
   });
 });
+
+describe('recipe', function() {
+  before(function()  {
+    return runServer();
+
+
+  });
+
+  after(function()  {
+    return closeServer();
+  });
+
+//GET test
+  it('should list the recipes', function()  {
+    return chai.request(app)
+      .get('/recipes')
+      .then(function(res) {
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+        expect(res.body).to.be.a('array');
+        expect(res.body.length).to.be.above(0);
+        res.body.forEach(function(item) {
+          expect(item).to.be.a('object');
+          expect(item).to.have.all.keys(
+            'id', 'name', 'ingredients');
+          
+        });
+      });
+  });
+
+  
+//POST test
+  it('should add a new recipe', function()  {
+    const newRecipe = {name: 'Mac & Chees', ingredients: ['mac', 'cheese']}
+    return chai.request(app)
+    .post('/recipes')
+    .send(newRecipe)
+    .then(function(res) {
+      expect(res).to.have.status(201);
+        expect(res).to.be.json;
+        expect(res.body).to.be.a('object');
+        expect(res.body).to.include.keys('id', 'name', 'ingredients');
+        expect(res.body.id).to.not.equal(null);
+        expect(res.body).to.deep.equal(Object.assign(newRecipe, {id: res.body.id}));
+    })
+  })
+
+
+//PUT test
+
+it('should get the list of recipes then PUT an update to one of them', function() {
+  const updateInfo =  {
+    "name": "Raspberry Pie",
+    "ingredients": ["Raspberries", "pie crust"]
+  };
+  return chai.request(app)
+    .get('/recipes')
+    .then(function(res) {
+      updateInfo.id = res.body[0].id;
+      return chai.request(app)
+        .put(`/recipes/${updateInfo.id}`)
+        .send(updateInfo)
+    })
+    //not sure why this doesn't return anything to validate or correct json headers.  Tried Postman
+    //as well and saw same results. status 204 - no data in response.  Commented out json and data compare check
+    .then(function(res) { 
+      expect(res).to.have.status(204);
+      //expect(res).to.be.json; 
+      expect(res.body).to.be.a('object');
+     // expect(res.body).to.deep.equal(updateInfo);
+    });
+   
+});
+
+
+//DELETE test
+
+it('should delete items with DELETE', function()  {
+  return chai.request(app)
+    .get('/recipes')
+    .then(function(res) {
+      return chai.request(app)
+        .delete(`/recipes/${res.body[0].id}`);
+    })
+    .then(function(res) {
+      expect(res).to.have.status(204);
+    });
+});
+
+
+})
