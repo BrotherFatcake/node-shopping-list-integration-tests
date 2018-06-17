@@ -143,11 +143,11 @@ describe('Shopping List', function() {
   });
 });
 
+
+//Tests for Recipe
 describe('recipe', function() {
   before(function()  {
     return runServer();
-
-
   });
 
   after(function()  {
@@ -167,7 +167,6 @@ describe('recipe', function() {
           expect(item).to.be.a('object');
           expect(item).to.have.all.keys(
             'id', 'name', 'ingredients');
-          
         });
       });
   });
@@ -205,6 +204,7 @@ it('should get the list of recipes then PUT an update to one of them', function(
         .put(`/recipes/${updateInfo.id}`)
         .send(updateInfo)
     })
+
     //not sure why this doesn't return anything to validate or correct json headers.  Tried Postman
     //as well and saw same results. status 204 - no data in response.  Commented out json and data compare check
     .then(function(res) { 
@@ -213,7 +213,6 @@ it('should get the list of recipes then PUT an update to one of them', function(
       expect(res.body).to.be.a('object');
      // expect(res.body).to.deep.equal(updateInfo);
     });
-   
 });
 
 
